@@ -3,13 +3,15 @@
 # @Time: 2020/1/8 16:09
 # @Author: CHEN MIAOMIAO
 
+'''
+认证(验证)蓝图： 包括注册新用户、登录和注销视图
+'''
+
 import functools
 from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
 from flaskr.db import get_db
-'''
-认证(验证)蓝图： 包括注册新用户、登录和注销视图
-'''
+
 
 
 # 注册到蓝图

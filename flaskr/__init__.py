@@ -5,7 +5,7 @@
 
 import os
 from flask import Flask
-
+from flask.views import View
 
 def create_app(test_config=None):
     # create and configure the app
@@ -32,12 +32,15 @@ def create_app(test_config=None):
     @app.route('/hello')
     def hello():
         return 'Hello, World!'
-    @app.route('/index')
-    def index():
-        return '登录成功。'
 
-    from . import db, auth
-    db.init_app(app)
-    app.register_blueprint(auth.bp)  #将蓝图注册到应用
+    # # @app.route('/index')
+    # def index():
+    #     return '登录成功。'
+
+    from . import db, auth, blog
+    db.init_app(app)   # 将数据库注册到应用
+    app.register_blueprint(auth.bp)  # 将登录蓝图注册到应用
+    app.register_blueprint(blog.bp)  # 将博客蓝图注册到应用
+    app.add_url_rule('/', endpoint='index')
 
     return app

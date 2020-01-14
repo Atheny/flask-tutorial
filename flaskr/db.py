@@ -25,7 +25,7 @@ def init_db():
     with current_app.open_resource('schema.sql') as f:
         db.executescript(f.read().decode('utf8'))
 
-@click.command('init-db')
+@click.command('init-db')   # 绑定初始化数据库命令 flask init-db
 @with_appcontext
 def init_db_command():
     init_db()
@@ -33,5 +33,5 @@ def init_db_command():
 
 
 def init_app(app):
-    app.teardown_appcontext(close_db)
-    app.cli.add_command(init_db_command)
+    app.teardown_appcontext(close_db)   # 告诉 Flask 在返回响应后进行清理的时候调用此函数
+    app.cli.add_command(init_db_command)  # 添加一个新的 可以与 flask 一起工作的命令
